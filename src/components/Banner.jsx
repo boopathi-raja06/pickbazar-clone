@@ -1,31 +1,28 @@
-import React from 'react';
-
-const banners = [
-  { image: '/banners/banner1.jpg', alt: 'Express Delivery' },
-  { image: '/banners/banner2.jpg', alt: 'Cash On Delivery' },
-  { image: '/banners/banner3.jpg', alt: 'Gift Voucher' },
-];
+// src/components/Banner.jsx
+import React from "react";
+import banners from "../data/banners"; // Array of banner objects
 
 const Banner = () => {
   return (
-    <div style={{
-      display: 'flex',
-      justifyContent: 'center',
-      gap: '20px',
-      padding: '20px',
-      backgroundColor: '#fff'
-    }}>
-      {banners.map((banner, index) => (
+    <div
+      style={{
+        display: "flex",
+        overflowX: "auto",
+        padding: "20px",
+        gap: "20px",
+        background: "#f7f7f7"
+      }}
+    >
+      {banners.map((banner) => (
         <img
-          key={index}
+          key={banner.id}
           src={banner.image}
-          alt={banner.alt}
+          alt={banner.title}
           style={{
-            width: '300px',
-            height: '120px',
-            objectFit: 'cover',
-            borderRadius: '12px',
-            boxShadow: '0 2px 8px rgba(0,0,0,0.1)'
+            width: "300px",
+            height: "100px",
+            borderRadius: "10px",
+            objectFit: "cover"
           }}
         />
       ))}

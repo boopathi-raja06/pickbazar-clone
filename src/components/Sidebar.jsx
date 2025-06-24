@@ -1,19 +1,29 @@
-import React from 'react';
+import React from "react";
 
 const categories = [
-  'Fruits & Vegetables', 'Meat & Fish', 'Snacks', 'Pet Care', 'Home & Cleaning',
-  'Dairy', 'Cooking', 'Breakfast', 'Beverage', 'Health & Beauty'
+  "Fruits & Vegetables",
+  "Meat & Fish",
+  "Snacks",
+  "Pet Care",
+  "Home & Cleaning",
+  "Dairy",
+  "Cooking",
+  "Breakfast",
+  "Beverage",
+  "Health & Beauty"
 ];
 
-const Sidebar = () => (
-  <div style={{ padding: '20px' }}>
-    <h3 style={{ marginBottom: '15px' }}>Categories</h3>
-    <ul style={{ listStyle: 'none', padding: 0 }}>
-      {categories.map((cat, i) => (
-        <li key={i} style={{ marginBottom: '10px', cursor: 'pointer', color: '#333' }}>{cat}</li>
-      ))}
-    </ul>
-  </div>
-);
+const Sidebar = () => {
+  return (
+    <div style={{ width: "200px", marginRight: "20px" }}>
+      <h4 style={{ fontWeight: "bold" }}>Categories</h4>
+      <ul style={{ padding: 0, listStyle: "none" }}>
+        {categories.map((cat, idx) => (
+          <li key={idx} style={{ margin: "10px 0", color: "#333" }}>{cat}</li>
+        ))}
+      </ul>
+    </div>
+  );
+};
 
 export default Sidebar;

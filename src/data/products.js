@@ -1,5 +1,6 @@
-// src/data/products.js
-export const products = [
+// src/data/products.
+// 
+ const products = [
   {
     id: 1,
     name: "Baby Spinach",
@@ -23,3 +24,4 @@ export const products = [
   },
   // add more...
 ];
+export default products;
