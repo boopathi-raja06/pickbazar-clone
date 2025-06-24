@@ -6,30 +6,27 @@ const banners = [
   '/assets/banner3.jpg',
 ];
 
-const banner = () => {
+const Banner = () => {
   return (
-    
-    <div style={{ display: 'flex', gap: '10px', overflowX: 'auto', marginBottom: '20px' }}>
-        <div style={{ flex: 1, padding: '20px' }}>
-  <BannerSlider />
-
-  <div className="product-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: '20px' }}>
-    {products.map((product) => (
-      <ProductCard key={product.id} product={product} onAddToCart={handleAddToCart} />
-    ))}
-  </div>
-</div>
-
+    <div style={{ display: 'flex', gap: '15px', overflowX: 'auto', marginBottom: '30px' }}>
+        
       {banners.map((img, index) => (
         <img
           key={index}
           src={img}
           alt={`Banner ${index + 1}`}
-          style={{ width: '100%', maxWidth: '600px', borderRadius: '10px' }}
+          style={{
+            width: '100%',
+            maxWidth: '600px',
+            height: '200px',
+            objectFit: 'cover',
+            borderRadius: '10px',
+            flexShrink: 0,
+          }}
         />
       ))}
     </div>
   );
 };
 
-export default banner;
+export default Banner;
