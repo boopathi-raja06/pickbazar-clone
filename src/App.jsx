@@ -4,10 +4,11 @@ import Hero from "./components/Hero";
 import Banner from "./components/Banner";
 import Sidebar from "./components/Sidebar";
 import ProductList from "./components/ProductList";
-import Cart from "./components/Cart";
+import CartPanel from "./components/CartPanel"; // ✅
 
 const App = () => {
   const [cartItems, setCartItems] = useState([]);
+  const [isCartOpen, setIsCartOpen] = useState(false); // ✅
 
   const handleAddToCart = (product) => {
     setCartItems((prev) => {
@@ -23,28 +24,29 @@ const App = () => {
 
   return (
     <div style={{ fontFamily: "sans-serif", background: "#f5f5f5" }}>
-      {/* Header Navbar */}
-      <Header />
-
-      {/* Hero Section */}
+      <Header onCartToggle={() => setIsCartOpen(true)} />
       <Hero />
-
-      {/* Banner Section */}
       <Banner />
 
-      {/* Main Grid: Sidebar + Products + Cart */}
       <div
         style={{
           display: "grid",
-          gridTemplateColumns: "200px 1fr 300px",
+          gridTemplateColumns: "200px 1fr",
           gap: "20px",
-          padding: "20px"
+          padding: "20px",
         }}
       >
         <Sidebar />
         <ProductList onAddToCart={handleAddToCart} />
-        <Cart cartItems={cartItems} />
       </div>
+
+      {/* Floating Cart Panel */}
+      {isCartOpen && (
+        <CartPanel
+          cartItems={cartItems}
+          onClose={() => setIsCartOpen(false)}
+        />
+      )}
     </div>
   );
 };

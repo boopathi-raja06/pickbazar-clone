@@ -1,7 +1,7 @@
 // src/components/Header.jsx
 import React from "react";
 
-const Header = () => {
+const Header = ({ onCartToggle }) => {
   return (
     <header
       style={{
@@ -14,28 +14,45 @@ const Header = () => {
         boxShadow: "0 2px 4px rgba(0, 0, 0, 0.05)",
         position: "sticky",
         top: 0,
-        zIndex: 100
+        zIndex: 1000,
       }}
     >
+      {/* Logo */}
       <div style={{ fontWeight: "bold", fontSize: "1.5rem", color: "#0f9d58" }}>
         🛒 PickBazar
       </div>
 
+      {/* Nav Links */}
+      <nav>
+        <ul style={{ listStyle: "none", display: "flex", gap: "25px", margin: 0, padding: 0 }}>
+          <li><a href="#shop" style={navLinkStyle}>Shop</a></li>
+          <li><a href="#offer" style={navLinkStyle}>Offer</a></li>
+          <li><a href="#contact" style={navLinkStyle}>Contact</a></li>
+          <li><a href="#pages" style={navLinkStyle}>Pages</a></li>
+        </ul>
+      </nav>
+
+      {/* Cart Icon */}
       <button
+        onClick={onCartToggle}
         style={{
-          background: "#0f9d58",
-          color: "#fff",
+          background: "transparent",
           border: "none",
-          padding: "8px 16px",
-          borderRadius: "5px",
+          fontSize: "24px",
           cursor: "pointer",
-          fontSize: "14px"
         }}
+        title="View Cart"
       >
-        Cart
+        🛒
       </button>
     </header>
   );
+};
+
+const navLinkStyle = {
+  textDecoration: "none",
+  color: "#333",
+  fontWeight: "500",
 };
 
 export default Header;
