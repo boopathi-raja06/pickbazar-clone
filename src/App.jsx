@@ -1,14 +1,16 @@
-import { Routes, Route } from 'react-router-dom';
-import Home from './pages/Home';
-import Checkout from './pages/Checkout';
+import React from 'react';
+import Hero from './components/Hero';
+import Banner from './components/Banner';
+import MainLayout from './components/MainLayout';
 
-function App() {
+const App = () => {
   return (
-    <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/checkout" element={<Checkout />} />
-    </Routes>
+    <div>
+      <Hero />
+      <Banner />
+      <MainLayout />
+    </div>
   );
-}
+};
 
 export default App;

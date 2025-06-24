@@ -1,27 +1,31 @@
 import React from 'react';
 
 const banners = [
-  '/assets/banner1.jpg',
-  '/assets/banner2.jpg',
-  '/assets/banner3.jpg',
+  { image: '/banners/banner1.jpg', alt: 'Express Delivery' },
+  { image: '/banners/banner2.jpg', alt: 'Cash On Delivery' },
+  { image: '/banners/banner3.jpg', alt: 'Gift Voucher' },
 ];
 
 const Banner = () => {
   return (
-    <div style={{ display: 'flex', gap: '15px', overflowX: 'auto', marginBottom: '30px' }}>
-        
-      {banners.map((img, index) => (
+    <div style={{
+      display: 'flex',
+      justifyContent: 'center',
+      gap: '20px',
+      padding: '20px',
+      backgroundColor: '#fff'
+    }}>
+      {banners.map((banner, index) => (
         <img
           key={index}
-          src={img}
-          alt={`Banner ${index + 1}`}
+          src={banner.image}
+          alt={banner.alt}
           style={{
-            width: '100%',
-            maxWidth: '600px',
-            height: '200px',
+            width: '300px',
+            height: '120px',
             objectFit: 'cover',
-            borderRadius: '10px',
-            flexShrink: 0,
+            borderRadius: '12px',
+            boxShadow: '0 2px 8px rgba(0,0,0,0.1)'
           }}
         />
       ))}

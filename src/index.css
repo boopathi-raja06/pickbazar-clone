@@ -23,6 +23,10 @@ body {
   background-color: #fff;
   color: #000;
 }
+/* index.css or App.css */
+::-webkit-scrollbar {
+  display: none;
+}
 
 
 a {

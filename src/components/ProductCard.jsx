@@ -1,6 +1,8 @@
 import React from 'react';
 
 const ProductCard = ({ product, onAddToCart }) => {
+  if (!product) return null; // Prevent crashing if undefined
+
   return (
     <div style={{
       border: '1px solid #eee',
