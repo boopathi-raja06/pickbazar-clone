@@ -18,7 +18,7 @@ const App = () => {
   const [isLoginModalOpen, setLoginModalOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [username, setUsername] = useState("");
-
+  
   const toggleCart = () => {
     setShowCart((prev) => !prev);
   };
@@ -43,6 +43,13 @@ const App = () => {
       }
     });
   };
+  const clearCart = () => {
+  setCartItems([]);
+};
+const handleCartToggle = () => {
+  setShowCart(prev => !prev);
+};
+
 
   const handleUpdateQty = (productId, amount) => {
     setCartItems((prev) =>
@@ -77,9 +84,17 @@ const App = () => {
         cartItems={cartItems}
       />
 
-      {showCart && (
-        <CartPopup cartItems={cartItems} onUpdateQty={handleUpdateQty} />
-      )}
+     {showCart && (
+  <CartPopup
+    cartItems={cartItems}
+    onUpdateQty={handleUpdateQty}
+    onClose={handleCartToggle}
+    clearCart={clearCart}
+  />
+)}
+
+
+      
 
       {/* Only show LoginModal when needed */}
       {isLoginModalOpen && (

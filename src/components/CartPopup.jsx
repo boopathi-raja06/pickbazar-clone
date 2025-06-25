@@ -1,33 +1,44 @@
-import React from "react";
+// src/components/CartPopup.jsx
+import React, { useState } from "react";
+import CheckoutModal from "./CheckoutModal";
 
-const CartPopup = ({ cartItems, onUpdateQty }) => {
-  const total = cartItems.reduce((sum, item) => sum + item.price * item.qty, 0);
+const CartPopup = ({ cartItems, onUpdateQty, onClose, clearCart }) => {
+  const [showCheckout, setShowCheckout] = useState(false);
+
+  const handleCheckout = () => {
+    setShowCheckout(true);
+  };
 
   return (
     <div className="cart-popup">
-      <h3>Cart</h3>
+      <h3>Your Cart</h3>
       {cartItems.length === 0 ? (
         <p>No items in cart</p>
       ) : (
-        <ul>
-          {cartItems.map((item) => (
-            <li key={item.id} style={{ marginBottom: "1rem" }}>
-              <div>
-                <strong>{item.name}</strong> - ₹{item.price} x {item.qty}
-              </div>
-              <div>
-                <button onClick={() => onUpdateQty(item.id, -1)}>-</button>
-                <button onClick={() => onUpdateQty(item.id, 1)}>+</button>
-              </div>
-            </li>
-          ))}
-        </ul>
+        cartItems.map((item) => (
+          <div className="cart-item" key={item.id}>
+            <span>{item.name}</span>
+            <div className="cart-controls">
+              <button onClick={() => onUpdateQty(item.id, item.qty - 1)}>-</button>
+              <span>{item.qty}</span>
+              <button onClick={() => onUpdateQty(item.id, item.qty + 1)}>+</button>
+            </div>
+          </div>
+        ))
       )}
       {cartItems.length > 0 && (
-        <div style={{ marginTop: "1rem" }}>
-          <p>Total: ₹{total.toFixed(2)}</p>
-          <button style={{ marginTop: "0.5rem" }}>Checkout</button>
-        </div>
+        <button className="checkout-btn" onClick={handleCheckout}>
+          Checkout
+        </button>
+      )}
+      {showCheckout && (
+        <CheckoutModal
+          onClose={() => {
+            setShowCheckout(false);
+            onClose(); // close cart popup
+          }}
+          clearCart={clearCart}
+        />
       )}
     </div>
   );
