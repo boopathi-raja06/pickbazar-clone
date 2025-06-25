@@ -51,15 +51,25 @@ const handleCartToggle = () => {
 };
 
 
-  const handleUpdateQty = (productId, amount) => {
-    setCartItems((prev) =>
-      prev
-        .map((item) =>
-          item.id === productId ? { ...item, qty: item.qty + amount } : item
-        )
-        .filter((item) => item.qty > 0)
-    );
-  };
+  const handleUpdateQty = (productId, newQty) => {
+  setCartItems(prevItems => {
+    if (newQty <= 0) {
+      return prevItems.filter(item => item.id !== productId);
+    }
+
+    const itemExists = prevItems.find(item => item.id === productId);
+    if (itemExists) {
+      // update the qty immutably
+      return prevItems.map(item =>
+        item.id === productId ? { ...item, qty: newQty } : item
+      );
+    } else {
+      // shouldn't happen through UI, but safe fallback
+      return [...prevItems, { id: productId, qty: newQty }];
+    }
+  });
+};
+
 
   const cartProductCount = cartItems.length;
 
