@@ -37,10 +37,14 @@ import pancake from '../assets/pancake.jpg';
 
 const products = [
   // Fruits (4)
-  { id: 1, name: "Apples", weight: "1lb", price: 1.6, image: apple, category: "Fruits" },
-  { id: 2, name: "Blueberries", weight: "1lb", price: 3.0, image: blueberries, category: "Fruits" },
-  { id: 3, name: "Mango", weight: "1kg", price: 2.5, image: mango, category: "Fruits" },
-  { id: 4, name: "Oranges", weight: "2lb", price: 1.8, image: oranges, category: "Fruits" },
+  { id: 1, name: "Apples", weight: "1lb", price: 1.6,discount: 0.2, // 20% off
+  category: "Fruits", image: apple, category: "Fruits" },
+  { id: 2, name: "Blueberries", weight: "1lb", price: 3.0, discount: 0.1, // 20% off
+  category: "Fruits",image: blueberries, category: "Fruits" },
+  { id: 3, name: "Mango", weight: "1kg", price: 2.5,discount: 0.3, // 20% off
+  category: "Fruits", image: mango, category: "Fruits" },
+  { id: 4, name: "Oranges", weight: "2lb", price: 1.8,discount: 0.2, // 20% off
+  category: "Fruits", image: oranges, category: "Fruits" },
 
   // Vegetables (4)
   { id: 5, name: "Baby Spinach", weight: "2lb", price: 0.6, image: spinach, category: "Vegetables" },

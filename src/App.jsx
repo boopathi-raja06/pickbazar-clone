@@ -1,99 +1,95 @@
 // src/App.jsx
 import React, { useState } from "react";
+import LoginModal from "./components/LoginModal";
 import Header from "./components/Header";
 import Hero from "./components/Hero";
 import Banner from "./components/Banner";
-import Sidebar from "./components/Sidebar";
-import ProductList from "./components/ProductList";
-import Cart from "./components/Cart";
+import MainLayout from "./components/MainLayout";
+import CartPopup from "./components/CartPopup";
+
 import "./App.css";
 
-function App() {
+const App = () => {
   const [cartItems, setCartItems] = useState([]);
+  const [showCart, setShowCart] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [searchTerm, setSearchTerm] = useState("");
-  const [showCart, setShowCart] = useState(false);
+  const [showLogin, setShowLogin] = useState(false);
+  const [isLoginModalOpen, setLoginModalOpen] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [username, setUsername] = useState("");
 
-  // Toggle cart display
   const toggleCart = () => {
-    setShowCart(!showCart);
+    setShowCart((prev) => !prev);
   };
 
-  // Add product to cart
+  const handleLogin = (username) => {
+    setIsLoggedIn(true);
+    setUsername(username);
+    setLoginModalOpen(false); // close modal after login
+  };
+
+  const handleLoginClick = () => setLoginModalOpen(true);
+
   const handleAddToCart = (product) => {
-    setCartItems((prevItems) => {
-      const exists = prevItems.find((item) => item.id === product.id);
+    setCartItems((prev) => {
+      const exists = prev.find((item) => item.id === product.id);
       if (exists) {
-        return prevItems.map((item) =>
+        return prev.map((item) =>
           item.id === product.id ? { ...item, qty: item.qty + 1 } : item
         );
       } else {
-        return [...prevItems, { ...product, qty: 1 }];
+        return [...prev, { ...product, qty: 1 }];
       }
     });
   };
 
-  // Update quantity
-  const handleUpdateQty = (productId, delta) => {
-    setCartItems((prevItems) =>
-      prevItems
+  const handleUpdateQty = (productId, amount) => {
+    setCartItems((prev) =>
+      prev
         .map((item) =>
-          item.id === productId ? { ...item, qty: item.qty + delta } : item
+          item.id === productId ? { ...item, qty: item.qty + amount } : item
         )
         .filter((item) => item.qty > 0)
     );
   };
 
-  // Checkout
-  const handleCheckout = () => {
-    setShowCart(false);
-    alert("Checked out successfully!");
-    setCartItems([]);
-  };
+  const cartProductCount = cartItems.length;
 
   return (
-    <>
-      {/* Header and Navigation */}
-      <Header />
+    <div>
+      <Header
+        cartCount={cartProductCount}
+        onCartToggle={toggleCart}
+        isLoggedIn={isLoggedIn}
+        username={username}
+        onLoginClick={handleLoginClick}
+      />
 
-      {/* Hero Section with Search */}
       <Hero searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
-
-      {/* Banner Images */}
       <Banner />
+      <MainLayout
+        searchTerm={searchTerm}
+        selectedCategory={selectedCategory}
+        onSelectCategory={setSelectedCategory}
+        onAddToCart={handleAddToCart}
+        onUpdateQty={handleUpdateQty}
+        cartItems={cartItems}
+      />
 
-      {/* Main Layout */}
-      <div className="main-container">
-        <div className="main-layout">
-          <Sidebar onSelectCategory={setSelectedCategory} />
-          <ProductList
-            onAddToCart={handleAddToCart}
-            onUpdateQty={handleUpdateQty}
-            cartItems={cartItems}
-            selectedCategory={selectedCategory}
-            searchTerm={searchTerm}
-          />
-        </div>
-      </div>
-
-      {/* Cart Button */}
-      <button className="cart-button" onClick={toggleCart}>
-        🛒
-        {cartItems.length > 0 && (
-          <span className="cart-count">{cartItems.length}</span>
-        )}
-      </button>
-
-      {/* Cart Popup */}
       {showCart && (
-        <Cart
-          cartItems={cartItems}
-          onUpdateQty={handleUpdateQty}
-          onCheckout={handleCheckout}
+        <CartPopup cartItems={cartItems} onUpdateQty={handleUpdateQty} />
+      )}
+
+      {/* Only show LoginModal when needed */}
+      {isLoginModalOpen && (
+        <LoginModal
+          onClose={() => setLoginModalOpen(false)}
+          onLogin={handleLogin}
         />
       )}
-    </>
+    </div>
   );
-}
+};
 
 export default App;
