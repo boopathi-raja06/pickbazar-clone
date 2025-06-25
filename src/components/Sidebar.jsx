@@ -1,20 +1,31 @@
+// src/components/Sidebar.jsx
 import React from "react";
 
-const Sidebar = () => {
+const Sidebar = ({ onSelectCategory }) => {
+  const categories = [
+    "All",
+    "Fruits",
+    "Vegetables",
+    "Dairy",
+    "Snacks",
+    "Meat & Fish",
+    "Cooking",
+    "Breakfast",
+  ];
+
   return (
     <aside className="sidebar">
       <h3>Categories</h3>
       <ul>
-        <li>Fruits</li>
-        <li>Vegetables</li>
-        <li>Dairy</li>
-        <li>Beverages</li>
-        <li>Snacks</li>
-        <li>Meat & Fish</li>
-        <li>Home & Cleaning</li>
-        <li>Cooking</li>
-        <li>Breakfast</li>
-        <li>Health & Beauty</li>
+        {categories.map((cat) => (
+          <li
+            key={cat}
+            style={{ cursor: "pointer", marginBottom: "0.5rem" }}
+            onClick={() => onSelectCategory(cat)}
+          >
+            {cat}
+          </li>
+        ))}
       </ul>
     </aside>
   );

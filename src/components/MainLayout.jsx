@@ -1,15 +1,19 @@
-import React from 'react';
+// src/components/MainLayout.jsx
+import React, { useState } from 'react';
 import Sidebar from './Sidebar';
 import ProductList from './ProductList';
 
-const MainLayout = ({ onAddToCart, onUpdateQty, cartItems }) => {
+const MainLayout = ({ cartItems, onAddToCart, onUpdateQty }) => {
+  const [selectedCategory, setSelectedCategory] = useState("All");
+
   return (
     <div className="main-layout">
-      <Sidebar />
+      <Sidebar onSelectCategory={setSelectedCategory} />
       <ProductList
+        cartItems={cartItems}
         onAddToCart={onAddToCart}
         onUpdateQty={onUpdateQty}
-        cartItems={cartItems}
+        selectedCategory={selectedCategory}
       />
     </div>
   );

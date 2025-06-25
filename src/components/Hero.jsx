@@ -1,11 +1,16 @@
 import React from "react";
 
-const Hero = () => {
+const Hero = ({ searchTerm, setSearchTerm }) => {
   return (
-    <section className="hero">
-      <h1>Welcome to PickBazar</h1>
-      <input type="text" placeholder="Search for products..." />
-    </section>
+    <div className="hero">
+      <h1>Welcome to PickBazar Grocery</h1>
+      <input
+        type="text"
+        placeholder="Search for products..."
+        value={searchTerm}
+        onChange={(e) => setSearchTerm(e.target.value)}
+      />
+    </div>
   );
 };
 
