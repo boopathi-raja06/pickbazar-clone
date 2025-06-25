@@ -1,16 +1,23 @@
 // src/components/ProductCard.jsx
-import React from "react";
+import React from 'react';
 
-const ProductCard = ({ product, onAddToCart }) => {
+const ProductCard = ({ product, onAddToCart, onUpdateQty, quantity = 0 }) => {
   return (
-    <div style={{ padding: "10px", border: "1px solid #ccc", borderRadius: "10px", textAlign: "center" }}>
-      <img src={product.image} alt={product.name} style={{ width: "100%", height: "150px", objectFit: "cover" }} />
-      <h3>{product.name}</h3>
+    <div className="product-card">
+      <img src={product.image} alt={product.name} />
+      <h4>{product.name}</h4>
       <p>{product.weight}</p>
-      <p>${product.price.toFixed(2)}</p>
-      <button onClick={() => onAddToCart(product)} style={{ background: "#0f9d58", color: "#fff", border: "none", padding: "8px", cursor: "pointer", borderRadius: "5px" }}>
-        Add to Cart
-      </button>
+      <p className="product-price">${product.price.toFixed(2)}</p>
+
+      {quantity > 0 ? (
+        <div className="qty-controls">
+          <button className="qty-btn" onClick={() => onUpdateQty(product.id, quantity - 1)}>-</button>
+          <span>{quantity}</span>
+          <button className="qty-btn" onClick={() => onUpdateQty(product.id, quantity + 1)}>+</button>
+        </div>
+      ) : (
+        <button className="add-btn" onClick={() => onAddToCart(product)}>Add to Cart</button>
+      )}
     </div>
   );
 };

@@ -1,14 +1,23 @@
 // src/components/ProductList.jsx
-import React from "react";
-import ProductCard from "./ProductCard";
-import products from "../data/products";
+import React from 'react';
+import products from '../data/products';
+import ProductCard from './ProductCard';
 
-const ProductList = ({ onAddToCart }) => {
+const ProductList = ({ onAddToCart, onUpdateQty, cartItems }) => {
   return (
-    <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(180px, 1fr))", gap: "20px" }}>
-      {products.map((product) => (
-        <ProductCard key={product.id} product={product} onAddToCart={onAddToCart} />
-      ))}
+    <div className="product-list">
+      {products.map(product => {
+        const cartItem = cartItems.find(item => item.id === product.id);
+        return (
+          <ProductCard
+            key={product.id}
+            product={product}
+            onAddToCart={onAddToCart}
+            onUpdateQty={onUpdateQty}
+            quantity={cartItem?.qty || 0}
+          />
+        );
+      })}
     </div>
   );
 };
