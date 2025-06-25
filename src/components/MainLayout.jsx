@@ -1,14 +1,16 @@
-import React from "react";
-import Sidebar from "./Sidebar";
-import ProductList from "./ProductList";
-import Cart from "./Cart";
+import React from 'react';
+import Sidebar from './Sidebar';
+import ProductList from './ProductList';
 
-const MainLayout = ({ cartItems, onAddToCart }) => {
+const MainLayout = ({ onAddToCart, onUpdateQty, cartItems }) => {
   return (
-    <div style={{ display: "grid", gridTemplateColumns: "200px 1fr 300px", gap: "20px", padding: "20px" }}>
+    <div className="main-layout">
       <Sidebar />
-      <ProductList onAddToCart={onAddToCart} />
-      <Cart cartItems={cartItems} />
+      <ProductList
+        onAddToCart={onAddToCart}
+        onUpdateQty={onUpdateQty}
+        cartItems={cartItems}
+      />
     </div>
   );
 };

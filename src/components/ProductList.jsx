@@ -3,7 +3,7 @@ import React from 'react';
 import products from '../data/products';
 import ProductCard from './ProductCard';
 
-const ProductList = ({ onAddToCart, onUpdateQty, cartItems }) => {
+const ProductList = ({ onAddToCart, onUpdateQty, cartItems = [] }) => {
   return (
     <div className="product-list">
       {products.map(product => {
